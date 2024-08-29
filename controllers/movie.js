@@ -108,7 +108,7 @@ module.exports.addMovieComment = ( req, res ) => {
             result.save()
             return res.status(200).send({ 
                 message: 'comment added successfully',
-                updatedMoview: result
+                updatedMovie: result
             
             })
         }else {

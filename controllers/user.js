@@ -88,3 +88,23 @@ module.exports.login = (req, res) => {
     }
     
 }
+
+module.exports.getDetails = async (req, res) => {
+   
+    return await User.findById(req.user.id)
+        .then(user => {
+
+            if (!user) {
+                // if no user is found, send a message 'User not found'.
+                return res.status(404).send({ message: 'User not found' })
+
+                // if the user is found, return the user.
+            } else {
+                
+                return res.status(200).send({
+                    user
+                });
+            }
+        })
+        .catch(err => errorHandler(err, req, res));
+};
