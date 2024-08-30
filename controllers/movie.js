@@ -89,35 +89,29 @@ module.exports.deleteMovie = ( req, res ) => {
 
 }
 
-module.exports.addMovieComment = ( req, res ) => {
-
+module.exports.addMovieComment = (req, res) => {
     const id = req.params.movieId;
 
-    Movie.findById( id ).then( result => {
+    Movie.findById(id).then(result => {
+        if (result) {
+            const newComment = {
+                userId: req.user.id,  // Assuming req.user is populated
+                comment: req.body.comment
+            };
 
-        if(result){
-
-            result.comments =[
-                {
-                    userId: req.user.id,
-                    comment: req.body.comment
-                }
-                
-            ]
-            
-            result.save()
-            return res.status(200).send({ 
-                message: 'comment added successfully',
-                updatedMovie: result
-            
-            })
-        }else {
-            return res.status(400).send({ message: 'failed to add comment'})
+            result.comments.push(newComment);  // Add the new comment to the array
+            return result.save().then(updatedMovie => {
+                return res.status(200).send({
+                    message: 'Comment added successfully',
+                    updatedMovie: updatedMovie
+                });
+            }).catch(err => errorHandler(err, req, res));
+        } else {
+            return res.status(400).send({ message: 'Failed to add comment' });
         }
-        
-    })
+    }).catch(err => errorHandler(err, req, res));
+};
 
-}
 
 module.exports.getMovieComments = ( req, res ) => {
 
