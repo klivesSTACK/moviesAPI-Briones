@@ -25,7 +25,7 @@ const cors = require("cors");
 const corsOptions = {
 
     //client/Frontend application URL
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'https://movies-client-eta.vercel.app'],
     // Allow only specified headers
     credentials: true,
     // Allow only specified HTTP methods
