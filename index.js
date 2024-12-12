@@ -29,7 +29,7 @@ const corsOptions = {
     // Allow only specified headers
     credentials: true,
     // Allow only specified HTTP methods
-    optionsSuccessStatus: 200
+    // optionsSuccessStatus: 200
 
 }
 
