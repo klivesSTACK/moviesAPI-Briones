@@ -30,8 +30,9 @@ const corsOptions = {
     credentials: true,
     // Allow only specified HTTP methods
     // optionsSuccessStatus: 200
-
-}
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+};
 
 app.use(cors(corsOptions));
 
