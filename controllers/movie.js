@@ -19,7 +19,7 @@ module.exports.addMovie = ( req, res) => {
             return res.status(409).send({message: 'Movie already exist'})
         }else {
             return newMovie.save().then(saveMovie => {
-                res.status(201).send( saveMovie )
+                res.status(201).send( { saveMovie })
             }).catch(err => errorHandler(err, req, res));
         }
     }).catch(err => errorHandler(err, req, res));
